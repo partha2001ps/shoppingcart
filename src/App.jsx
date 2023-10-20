@@ -1,6 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-function ProductCard({ imageSrc, name, price, sale, rating }) {
+function ProductCard({ imageSrc, name, price, sale, rating, addToCart, removeFromCart }) {
+  const [inCart, setInCart] = useState(false);
+
+  const handleAddToCart = () => {
+    setInCart(true);
+    addToCart();
+  };
+
+  const handleRemoveFromCart = () => {
+    setInCart(false);
+    removeFromCart();
+  };
+  
+  
   return (
     <div className="col mb-5">
       <div className="card h-100">
@@ -31,14 +44,14 @@ function ProductCard({ imageSrc, name, price, sale, rating }) {
         </div>
         <div className="card-footer p-4 pt-0 border-top-0 bg-transparent">
           <div className="text-center">
-            {sale ? (
-              <a className="btn btn-outline-dark mt-auto" href="#">
-                Add to cart
-              </a>
+            {inCart ? (
+              <button className="btn btn-outline-dark mt-auto" onClick={handleRemoveFromCart}>
+                Remove from cart
+              </button>
             ) : (
-              <a className="btn btn-outline-dark mt-auto" href="#">
-                View options
-              </a>
+              <button className="btn btn-outline-dark mt-auto" onClick={handleAddToCart}>
+                Add to cart
+              </button>
             )}
           </div>
         </div>
@@ -48,6 +61,17 @@ function ProductCard({ imageSrc, name, price, sale, rating }) {
 }
 
 function App() {
+  const [cartValue, setCartValue] = useState(0);
+
+  const addToCart = () => {
+    setCartValue(cartValue + 1);
+  };
+  
+  const removeFromCart = () => {
+    if (cartValue > 0) {
+      setCartValue(cartValue - 1);
+    }
+  };
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -115,7 +139,7 @@ function App() {
               <button className="btn btn-outline-dark" type="submit">
                 <i className="bi-cart-fill me-1"></i>
                 Cart
-                <span className="badge bg-dark text-white ms-1 rounded-pill">0</span>
+                <span className="badge bg-dark text-white ms-1 rounded-pill">{cartValue }</span>
               </button>
             </form>
           </div>
@@ -140,6 +164,8 @@ function App() {
               imageSrc="https://dummyimage.com/450x300/dee2e6/6c757d.jpg"
               name="Fancy Product"
               price={[40, 80]}
+              addToCart={addToCart}
+              removeFromCart={removeFromCart}
             />
             <ProductCard
               imageSrc="https://dummyimage.com/450x300/dee2e6/6c757d.jpg"
@@ -147,12 +173,16 @@ function App() {
               price={18}
               sale={true}
               rating={5}
+              addToCart={addToCart}
+              removeFromCart={removeFromCart}
             />
             <ProductCard
               imageSrc="https://dummyimage.com/450x300/dee2e6/6c757d.jpg"
               name="Sale Item"
               price={[25, 50]}
               sale={true}
+              addToCart={addToCart}
+              removeFromCart={removeFromCart}
             />
             <ProductCard
               imageSrc="https://dummyimage.com/450x300/dee2e6/6c757d.jpg"
@@ -165,6 +195,8 @@ function App() {
               name="Sale Item"
               price={[25, 50]}
               sale={true}
+              addToCart={addToCart}
+              removeFromCart={removeFromCart}
             />
             <ProductCard
               imageSrc="https://dummyimage.com/450x300/dee2e6/6c757d.jpg"
@@ -177,12 +209,16 @@ function App() {
               price={18}
               sale={true}
               rating={5}
+              addToCart={addToCart}
+              removeFromCart={removeFromCart}
             />
             <ProductCard
               imageSrc="https://dummyimage.com/450x300/dee2e6/6c757d.jpg"
               name="Popular Item"
               price={40}
               rating={5}
+              addToCart={addToCart}
+              removeFromCart={removeFromCart}
             />
           </div>
         </div>
