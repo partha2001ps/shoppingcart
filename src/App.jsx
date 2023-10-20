@@ -189,6 +189,8 @@ function App() {
               name="Popular Item"
               price={40}
               rating={5}
+              addToCart={addToCart}
+              removeFromCart={removeFromCart}
             />
             <ProductCard
               imageSrc="https://dummyimage.com/450x300/dee2e6/6c757d.jpg"
@@ -202,6 +204,8 @@ function App() {
               imageSrc="https://dummyimage.com/450x300/dee2e6/6c757d.jpg"
               name="Fancy Product"
               price={[120, 280]}
+              addToCart={addToCart}
+              removeFromCart={removeFromCart}
             />
             <ProductCard
               imageSrc="https://dummyimage.com/450x300/dee2e6/6c757d.jpg"
